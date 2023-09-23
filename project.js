@@ -3,19 +3,19 @@ let computerScore = 0
 
 function getComputerChoice() {
     let choice = ['Rock', 'Paper', 'Scissors'];
-    let random = Math.floor(Math.random() * 3);
+    let random = Math.floor(Math.random() * choice.length);
     return choice[random];
 }
 
 function playRound (playerSelection, computerSelection) {
     console.log ("1 ", playerSelection, "2 ", computerSelection)
-    if (playerSelection == "rock" && computerSelection == "Rock") {
+    if (
+        (playerSelection === "rock" && computerSelection === "Rock") ||
+        (playerSelection === "scissors" && computerSelection === "Scissors") ||
+        (playerSelection === "paper" && computerSelection === "Paper")
+    ){
         return "Tie"
-    } else if (playerSelection == "scissors" && computerSelection == "Scissors") {
-        return "Tie"
-    } else if (playerSelection == "paper" && computerSelection == "Paper") {
-        return "Tie"
-    } else if (playerSelection == "rock" && computerSelection == "Paper") {
+    } else if (playerSelection == "rock" && computerSelection === "Paper") {
         computerScore++
         return "You lose! Paper beats Rock"
     } else if (playerSelection == "paper" && computerSelection == "Scissors") {
@@ -37,14 +37,12 @@ function playRound (playerSelection, computerSelection) {
     }
 
 
-
-
     function game () {
-    for (let i = 0; i < 5; i++) {
-    const playerSelection = prompt("Rock, Paper or Scissors").toLowerCase();
-    const computerSelection = getComputerChoice();
-    console.log('1 ', playRound(playerSelection, computerSelection))
-    }
+        for (let i = 0; i < 5; i++){
+        const playerSelection = prompt("Rock, Paper or Scissors").toLowerCase();
+        const computerSelection = getComputerChoice();
+        console.log('1 ', playRound(playerSelection, computerSelection))
+        }
     if (playerScore > computerScore) {
         return "Congrats, you won!"
     } else if (playerScore < computerScore) {
