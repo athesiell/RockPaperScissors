@@ -4,6 +4,7 @@ const scissorsBtn = document.querySelector ('.scissors');
 const resultDiv = document.querySelector('.result');
 const playScoreSpan = document.querySelector('.player-score');
 const compScoreSpan = document.querySelector('.computer-score');
+const p = document.createElement('p');
 
 
 
@@ -18,56 +19,41 @@ function getComputerChoice() {
 }
 
 function playRound (playerSelection, computerSelection) {
-    
     if (
         (playerSelection === "rock" && computerSelection === "Rock") ||
         (playerSelection === "scissors" && computerSelection === "Scissors") ||
         (playerSelection === "paper" && computerSelection === "Paper")
     ){
-        const p = document.createElement('p');
         p.innerText = "It was a tie!"
-        resultDiv.appendChild(p)
     } else if (playerSelection == "rock" && computerSelection === "Paper") {
         computerScore++
-        const p = document.createElement('p');
         p.innerText = "You lose! Paper beats Rock";
-        resultDiv.appendChild(p)
     } else if (playerSelection == "paper" && computerSelection == "Scissors") {
         computerScore++
-        const p = document.createElement('p');
         p.innerText = "You lose! Scissors beats Paper";
-        resultDiv.appendChild(p)
     } else if (playerSelection == "scissors" && computerSelection == "Rock") {
         computerScore++
-        const p = document.createElement('p');
         p.innerText = "You lose! Rock beats Scissors"
-        resultDiv.appendChild(p)
     } else if (playerSelection == "rock" && computerSelection == "Scissors"){
         playerScore++
-        const p = document.createElement('p');
         p.innerText = "You win!"
-        resultDiv.appendChild(p)
     } else if (playerSelection == "paper" && computerSelection == "Rock") {
         playerScore++
-        const p = document.createElement('p');
         p.innerText = "You win!"
-        resultDiv.appendChild(p)
     } else if (playerSelection == "scissors" && computerSelection == "Paper") {
         playerScore++
-        const p = document.createElement('p');
         p.innerText = "You win!"
-        resultDiv.appendChild(p)
     }
+    resultDiv.appendChild(p)
     }
 
     function checkForWinner () {
+        const h2 = document.createElement('h2')
         if (playerScore === 5) {
-            const h2 = document.createElement('h2')
             h2.classList.add('player-won')
             h2.innerText = `You won ${playerScore} to ${computerScore}! Congrats!`
             resultDiv.appendChild(h2)
         } else if (computerScore === 5) {
-            const h2 = document.createElement('h2')
             h2.classList.add('computer-won')
             h2.innerText = `You lost ${playerScore} to ${computerScore}! Better luck next time!`
             resultDiv.appendChild(h2)
