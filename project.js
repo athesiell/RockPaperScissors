@@ -1,7 +1,10 @@
 const rockBtn = document.querySelector('.rock');
 const paperBtn = document.querySelector('.paper');
 const scissorsBtn = document.querySelector ('.scissors');
-const resultDiv = document.querySelector('.result')
+const resultDiv = document.querySelector('.result');
+const playScoreSpan = document.querySelector('.player-score');
+const compScoreSpan = document.querySelector('.computer-score');
+
 
 
 
@@ -15,7 +18,7 @@ function getComputerChoice() {
 }
 
 function playRound (playerSelection, computerSelection) {
-    console.log ("1 ", playerSelection, "2 ", computerSelection)
+    
     if (
         (playerSelection === "rock" && computerSelection === "Rock") ||
         (playerSelection === "scissors" && computerSelection === "Scissors") ||
@@ -57,22 +60,47 @@ function playRound (playerSelection, computerSelection) {
     }
     }
 
+    function checkForWinner () {
+        if (playerScore === 5) {
+            const h2 = document.createElement('h2')
+            h2.classList.add('player-won')
+            h2.innerText = `You won ${playerScore} to ${computerScore}! Congrats!`
+            resultDiv.appendChild(h2)
+        } else if (computerScore === 5) {
+            const h2 = document.createElement('h2')
+            h2.classList.add('computer-won')
+            h2.innerText = `You lost ${playerScore} to ${computerScore}! Better luck next time!`
+            resultDiv.appendChild(h2)
+        }
+    }
+
+function updateScore(playerScore, computerScore) {
+    playScoreSpan.innerText = `Player Score: ${playerScore}`
+    compScoreSpan.innerText = `Computer Score: ${computerScore}`
+}
+
     rockBtn.addEventListener('click', () => {
        const computerSelection = getComputerChoice()
        const playerSelection = 'rock'
        playRound(playerSelection, computerSelection)
+       updateScore(playerScore, computerScore)
+       checkForWinner (playerScore, computerScore)
     })
 
     paperBtn.addEventListener('click', () => {
         const computerSelection = getComputerChoice()
         const playerSelection = 'paper'
         playRound(playerSelection, computerSelection)
+        updateScore(playerScore, computerScore)
+        checkForWinner (playerScore, computerScore)
      })
 
      scissorsBtn.addEventListener('click', () => {
         const computerSelection = getComputerChoice()
         const playerSelection = 'scissors'
         playRound(playerSelection, computerSelection)
+        updateScore(playerScore, computerScore)
+        checkForWinner (playerScore, computerScore)
      })
     
 
